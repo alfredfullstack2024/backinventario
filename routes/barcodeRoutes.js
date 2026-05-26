@@ -9,10 +9,11 @@ router.get("/:codigo", async (req, res) => {
     const png = await bwipjs.toBuffer({
       bcid: "code128", // tipo de código
       text: req.params.codigo, // el código del producto
-      scale: 5, // tamaño
-      height: 18, // alto de las barras
-      includetext: true, // mostrar el texto debajo
-      textxalign: "center",
+      scale: 8,
+height: 30,
+includetext: false,
+paddingwidth: 20,
+paddingheight: 10,
     });
     res.type("image/png");
     res.send(png);
