@@ -50,6 +50,27 @@ const movimientoSchema = new mongoose.Schema(
       default: "",
     },
 
+    // =========================
+    // NUEVOS CAMPOS
+    // =========================
+
+    numeroLote: {
+      type: String,
+      default: "",
+      trim: true,
+    },
+
+    fechaVencimiento: {
+      type: Date,
+      default: null,
+    },
+
+    numeroRemisionFactura: {
+      type: String,
+      default: "",
+      trim: true,
+    },
+
     usuario: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Usuario",
