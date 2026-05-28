@@ -7,7 +7,14 @@ import Movimiento from "../models/Movimiento.js";
 // ==========================================
 export const registrarEntrada = async (req, res) => {
   try {
-    const { codigoId, cantidad, observacion } = req.body;
+    const {
+  codigoId,
+  cantidad,
+  observacion,
+  numeroLote,
+  fechaVencimiento,
+  numeroRemisionFactura,
+} = req.body;
 
     // =========================
     // VALIDACIONES
@@ -54,30 +61,31 @@ export const registrarEntrada = async (req, res) => {
 
     const fechaEntrada = new Date();
 
-    // 180 días
-    const fechaVencimiento = new Date();
-
-    fechaVencimiento.setDate(fechaVencimiento.getDate() + 180);
+    
 
     // =========================
     // CREAR LOTE
     // =========================
 
     const lote = await Lote.create({
-      codigo: codigo._id,
+  codigo: codigo._id,
 
-      cantidadInicial: Number(cantidad),
+  cantidadInicial: Number(cantidad),
 
-      stockDisponible: Number(cantidad),
+  stockDisponible: Number(cantidad),
 
-      fechaEntrada,
+  fechaEntrada,
 
-      fechaVencimiento,
+  numeroLote,
 
-      observacion,
+  fechaVencimiento,
 
-      usuario: req.usuario._id,
-    });
+  numeroRemisionFactura,
+
+  observacion,
+
+  usuario: req.usuario._id,
+});
 
     // =========================
     // ACTUALIZAR STOCK
@@ -101,23 +109,28 @@ export const registrarEntrada = async (req, res) => {
     // =========================
 
     await Movimiento.create({
-      codigo: codigo._id,
+  codigo: codigo._id,
 
-      usuario: req.usuario._id,
+  usuario: req.usuario._id,
 
-      tipo: "entrada",
+  tipo: "entrada",
 
-      cantidad: Number(cantidad),
+  cantidad: Number(cantidad),
 
-      stockAnterior,
+  stockAnterior,
 
-      stockNuevo,
+  stockNuevo,
 
-      motivo: "Ingreso inventario",
+  motivo: "Ingreso inventario",
 
-      observacion,
-    });
+  observacion,
 
+  numeroLote,
+
+  fechaVencimiento,
+
+  numeroRemisionFactura,
+});
     // =========================
     // RESPUESTA
     // =========================
