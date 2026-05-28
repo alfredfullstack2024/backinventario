@@ -23,9 +23,26 @@ const loteSchema = new mongoose.Schema(
       default: Date.now,
     },
 
+    // =========================
+    // NUEVOS CAMPOS
+    // =========================
+
+    numeroLote: {
+      type: String,
+      default: "",
+      trim: true,
+    },
+
     fechaVencimiento: {
       type: Date,
-      required: true,
+      required: false,
+      default: null,
+    },
+
+    numeroRemisionFactura: {
+      type: String,
+      default: "",
+      trim: true,
     },
 
     observacion: {
