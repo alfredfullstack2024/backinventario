@@ -1,6 +1,9 @@
 import express from "express";
 
-import { registrarEntrada } from "../controllers/loteController.js";
+import {
+  registrarEntrada,
+  obtenerLotesPorCodigo,
+} from "../controllers/loteController.js";
 
 import { protegerRuta } from "../middleware/authMiddleware.js";
 
@@ -17,6 +20,11 @@ router.post(
   protegerRuta,
   autorizarRoles("admin", "operador"),
   registrarEntrada,
+);
+router.get(
+  "/codigo/:codigoId",
+  protegerRuta,
+  obtenerLotesPorCodigo,
 );
 
 export default router;
