@@ -99,6 +99,15 @@ const codigoSchema = new mongoose.Schema({
       type: String,
       default: "",
     },
+    diasAlertaAmarillo: {
+  type: Number,
+  default: 180,
+},
+
+diasAlertaRojo: {
+  type: Number,
+  default: 30,
+},
   },
   fechaGeneracion: {
     type: Date,
