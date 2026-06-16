@@ -232,7 +232,7 @@ export const asignarProducto = async (req, res) => {
 
       ubicacion,
 
-      stock: stock || 1,
+      stock: stock || 0,
 
       cantidadMinimaMensual,
 
