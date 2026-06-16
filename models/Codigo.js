@@ -72,7 +72,7 @@ const codigoSchema = new mongoose.Schema({
 
     stock: {
       type: Number,
-      default: 1,
+      default: 0,
     },
 
     cantidadMinimaMensual: {
