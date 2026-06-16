@@ -7,13 +7,15 @@ import Movimiento from "../models/Movimiento.js";
 // ==========================================
 export const registrarEntrada = async (req, res) => {
   try {
-    const {
+   const {
   codigoId,
   cantidad,
   observacion,
   numeroLote,
   fechaVencimiento,
   numeroRemisionFactura,
+  refCaja,
+  refTarro,
 } = req.body;
 
     // =========================
@@ -81,6 +83,10 @@ export const registrarEntrada = async (req, res) => {
   fechaVencimiento,
 
   numeroRemisionFactura,
+
+  refCaja,
+
+  refTarro,
 
   observacion,
 
