@@ -2,8 +2,10 @@ import Lote from "../models/Lote.js";
 import Codigo from "../models/Codigo.js";
 import Movimiento from "../models/Movimiento.js";
 
-
- export const obtenerLotesPorCodigo = async (req, res) => {
+// ==========================================
+// OBTENER LOTES POR CÓDIGO
+// ==========================================
+export const obtenerLotesPorCodigo = async (req, res) => {
   try {
     const { codigoId } = req.params;
 
@@ -15,22 +17,34 @@ import Movimiento from "../models/Movimiento.js";
       .sort({
         fechaEntrada: -1,
       });
+
+    res.json(lotes);
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      error: "Error obteniendo lotes",
+    });
+  }
+};
+
 // ==========================================
 // REGISTRAR NUEVA ENTRADA
 // ==========================================
 export const registrarEntrada = async (req, res) => {
   try {
-   const {
-  codigoId,
-  cantidad,
-  observacion,
-  numeroLote,
-  fechaVencimiento,
-  numeroRemisionFactura,
-  refCaja,
-  refTarro,
-} = req.body;
+    const {
+      codigoId,
+      cantidad,
+      observacion,
+      numeroLote,
+      fechaVencimiento,
+      numeroRemisionFactura,
+      refCaja,
+      refTarro,
+    } = req.body;
 
+    // AQUÍ SIGUE TODO EL CÓDIGO QUE YA TENÍAS
    
 
     res.json(lotes);
