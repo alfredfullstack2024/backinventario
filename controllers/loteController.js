@@ -18,6 +18,29 @@ export const registrarEntrada = async (req, res) => {
   refTarro,
 } = req.body;
 
+    export const obtenerLotesPorCodigo = async (req, res) => {
+  try {
+    const { codigoId } = req.params;
+
+    const lotes = await Lote.find({
+      codigo: codigoId,
+      activo: true,
+    })
+      .populate("usuario", "nombre")
+      .sort({
+        fechaEntrada: -1,
+      });
+
+    res.json(lotes);
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      error: "Error obteniendo lotes",
+    });
+  }
+};
+
     // =========================
     // VALIDACIONES
     // =========================
