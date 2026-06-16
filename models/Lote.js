@@ -44,6 +44,17 @@ const loteSchema = new mongoose.Schema(
       default: "",
       trim: true,
     },
+    refCaja: {
+  type: String,
+  default: "",
+  trim: true,
+},
+
+refTarro: {
+  type: String,
+  default: "",
+  trim: true,
+},
 
     observacion: {
       type: String,
