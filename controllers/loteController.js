@@ -14,9 +14,7 @@ export const obtenerLotesPorCodigo = async (req, res) => {
       activo: true,
     })
       .populate("usuario", "nombre")
-      .sort({
-        fechaEntrada: -1,
-      });
+      .sort({ fechaEntrada: -1 });
 
     res.json(lotes);
   } catch (error) {
@@ -44,19 +42,6 @@ export const registrarEntrada = async (req, res) => {
       refTarro,
     } = req.body;
 
-    // AQUÍ SIGUE TODO EL CÓDIGO QUE YA TENÍAS
-   
-
-    res.json(lotes);
-  } catch (error) {
-    console.error(error);
-
-    res.status(500).json({
-      error: "Error obteniendo lotes",
-    });
-  }
-};
-
     // =========================
     // VALIDACIONES
     // =========================
@@ -67,7 +52,7 @@ export const registrarEntrada = async (req, res) => {
       });
     }
 
-    if (cantidad <= 0) {
+    if (Number(cantidad) <= 0) {
       return res.status(400).json({
         error: "Cantidad inválida",
       });
@@ -77,8 +62,9 @@ export const registrarEntrada = async (req, res) => {
     // BUSCAR CÓDIGO
     // =========================
 
-    const codigo =
-      await Codigo.findById(codigoId).populate("producto.categoria");
+    const codigo = await Codigo.findById(codigoId).populate(
+      "producto.categoria",
+    );
 
     if (!codigo) {
       return res.status(404).json({
@@ -102,35 +88,33 @@ export const registrarEntrada = async (req, res) => {
 
     const fechaEntrada = new Date();
 
-    
-
     // =========================
     // CREAR LOTE
     // =========================
 
     const lote = await Lote.create({
-  codigo: codigo._id,
+      codigo: codigo._id,
 
-  cantidadInicial: Number(cantidad),
+      cantidadInicial: Number(cantidad),
 
-  stockDisponible: Number(cantidad),
+      stockDisponible: Number(cantidad),
 
-  fechaEntrada,
+      fechaEntrada,
 
-  numeroLote,
+      numeroLote,
 
-  fechaVencimiento,
+      fechaVencimiento: fechaVencimiento || null,
 
-  numeroRemisionFactura,
+      numeroRemisionFactura,
 
-  refCaja,
+      refCaja,
 
-  refTarro,
+      refTarro,
 
-  observacion,
+      observacion,
 
-  usuario: req.usuario._id,
-});
+      usuario: req.usuario._id,
+    });
 
     // =========================
     // ACTUALIZAR STOCK
@@ -154,22 +138,23 @@ export const registrarEntrada = async (req, res) => {
     // =========================
 
     await Movimiento.create({
-  codigo: codigo._id,
+      codigo: codigo._id,
 
-  usuario: req.usuario._id,
+      usuario: req.usuario._id,
 
-  tipo: "entrada",
+      tipo: "entrada",
 
-  cantidad: Number(cantidad),
+      cantidad: Number(cantidad),
 
-  stockAnterior,
+      stockAnterior,
 
-  stockNuevo,
+      stockNuevo,
 
-  motivo: "Ingreso inventario",
+      motivo: "Ingreso inventario",
 
-  observacion,
-});
+      observacion,
+    });
+
     // =========================
     // RESPUESTA
     // =========================
