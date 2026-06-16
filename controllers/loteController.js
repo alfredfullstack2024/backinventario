@@ -130,12 +130,6 @@ export const registrarEntrada = async (req, res) => {
   motivo: "Ingreso inventario",
 
   observacion,
-
-  numeroLote,
-
-  fechaVencimiento,
-
-  numeroRemisionFactura,
 });
     // =========================
     // RESPUESTA
