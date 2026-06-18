@@ -171,26 +171,31 @@ export const asignarProducto = async (req, res) => {
   try {
     const { codigo } = req.params;
     const {
-      nombre,
-      referencia,
-      presentacion,
-      marcaFabricante,
-      registroInvima,
-      clasificacionRiesgo,
+  nombre,
+  referencia,
+  presentacion,
+  marcaFabricante,
+  registroInvima,
+  clasificacionRiesgo,
+  descripcion,
+  precio,
+  categoria,
+  ubicacion,
+  stock,
 
-      descripcion,
-      precio,
-      categoria,
-      ubicacion,
-      stock,
+  cantidadMinimaMensual,
+  cantidadMaximaMensual,
 
-      cantidadMinimaMensual,
-      cantidadMaximaMensual,
+  numeroLote,
+  fechaVencimiento,
+  numeroRemisionFactura,
 
-      numeroLote,
-      fechaVencimiento,
-      numeroRemisionFactura,
-    } = req.body;
+  refCaja,
+  refTarro,
+
+  diasAlertaAmarillo,
+  diasAlertaRojo,
+} = req.body;
 
     if (!nombre) {
       return res
@@ -214,36 +219,27 @@ export const asignarProducto = async (req, res) => {
     codigoExistente.estado = "asignado";
     codigoExistente.producto = {
       nombre,
-
       referencia,
-
       presentacion,
-
       marcaFabricante,
-
       registroInvima,
-
       clasificacionRiesgo,
-
       descripcion,
-
       precio,
-
       categoria,
-
       ubicacion,
 
       stock: Number(stock) || 0,
 
       cantidadMinimaMensual,
-
       cantidadMaximaMensual,
-
       numeroLote,
-
       fechaVencimiento,
-
       numeroRemisionFactura,
+      refCaja,
+      refTarro,
+      diasAlertaAmarillo,
+      diasAlertaRojo,
     };
     codigoExistente.fechaAsignacion = new Date();
     console.log("=================================");
