@@ -254,21 +254,15 @@ export const asignarProducto = async (req, res) => {
 if (Number(stock) > 0) {
   await Lote.create({
     codigo: codigoExistente._id,
-
     cantidadInicial: Number(stock),
-
     stockDisponible: Number(stock),
-
     fechaEntrada: new Date(),
-
     numeroLote,
-
     fechaVencimiento: fechaVencimiento || null,
-
     numeroRemisionFactura,
-
+     refCaja,
+     refTarro,
     usuario: null,
-
     activo: true,
   });
 }
