@@ -2,6 +2,7 @@ import Codigo from "../models/Codigo.js";
 import Lote from "../models/Lote.js";
 import { v4 as uuidv4 } from "uuid";
 
+
 // Generar códigos por rango específico
 export const generarCodigosPorRango = async (req, res) => {
   try {
@@ -250,6 +251,31 @@ export const asignarProducto = async (req, res) => {
     console.log(JSON.stringify(codigoExistente.producto, null, 2));
     console.log("=================================");
     await codigoExistente.save();
+    // ==========================================
+// CREAR LOTE INICIAL
+// ==========================================
+
+if (Number(stock) > 0) {
+  await Lote.create({
+    codigo: codigoExistente._id,
+
+    cantidadInicial: Number(stock),
+
+    stockDisponible: Number(stock),
+
+    fechaEntrada: new Date(),
+
+    numeroLote,
+
+    fechaVencimiento: fechaVencimiento || null,
+
+    numeroRemisionFactura,
+
+    usuario: null,
+
+    activo: true,
+  });
+}
     await codigoExistente.populate("producto.categoria");
 
     res.json({
