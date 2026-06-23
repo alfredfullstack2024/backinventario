@@ -1,12 +1,20 @@
 import Movimiento from "../models/Movimiento.js";
 import Codigo from "../models/Codigo.js";
+import Lote from "../models/Lote.js";
 
 // ==========================================
 // REGISTRAR MOVIMIENTO
 // ==========================================
 export const registrarMovimiento = async (req, res) => {
   try {
-    const { codigoId, tipo, cantidad, motivo, observacion } = req.body;
+    const {
+  codigoId,
+  loteId,
+  tipo,
+  cantidad,
+  motivo,
+  observacion
+} = req.body;
 
     // Validaciones básicas
     if (!codigoId || !tipo || !cantidad) {
@@ -44,7 +52,36 @@ export const registrarMovimiento = async (req, res) => {
         nuevoStock += cantidad;
         break;
 
-      case "salida":
+    case "salida":
+
+  if (!loteId) {
+    return res.status(400).json({
+      error: "Debe seleccionar un lote",
+    });
+  }
+
+  const lote = await Lote.findById(loteId);
+
+  if (!lote) {
+    return res.status(404).json({
+      error: "Lote no encontrado",
+    });
+  }
+
+  if (cantidad > lote.stockDisponible) {
+    return res.status(400).json({
+      error: "Stock insuficiente en el lote seleccionado",
+    });
+  }
+
+  lote.stockDisponible =
+    lote.stockDisponible - Number(cantidad);
+
+  await lote.save();
+
+  nuevoStock -= Number(cantidad);
+
+  break;
       case "perdida":
       case "dañado":
         if (cantidad > stockActual) {
