@@ -146,11 +146,17 @@ export const registrarMovimiento = async (req, res) => {
 
   numeroLote: lote?.numeroLote || "",
 
+  fechaVencimiento:
+    lote?.fechaVencimiento || null,
+
   numeroRemisionFactura:
     lote?.numeroRemisionFactura || "",
 
-  fechaVencimiento:
-    lote?.fechaVencimiento || null,
+  refCaja:
+    lote?.refCaja || "",
+
+  refTarro:
+    lote?.refTarro || "",
 });
 
     const movimientoCompleto = await Movimiento.findById(
