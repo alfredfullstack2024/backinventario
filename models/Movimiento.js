@@ -71,6 +71,18 @@ const movimientoSchema = new mongoose.Schema(
       trim: true,
     },
 
+    refCaja: {
+  type: String,
+  default: "",
+  trim: true,
+},
+
+refTarro: {
+  type: String,
+  default: "",
+  trim: true,
+},
+
     usuario: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Usuario",
