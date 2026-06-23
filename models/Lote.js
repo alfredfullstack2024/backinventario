@@ -18,6 +18,11 @@ const loteSchema = new mongoose.Schema(
       required: true,
     },
 
+    precioUnitario: {
+  type: Number,
+  default: 0,
+},
+
     fechaEntrada: {
       type: Date,
       default: Date.now,
