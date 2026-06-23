@@ -39,10 +39,11 @@ export const registrarMovimiento = async (req, res) => {
       });
     }
 
-    const stockActual = codigo.producto.stock || 0;
+   const stockActual = codigo.producto.stock || 0;
 
-    let nuevoStock = stockActual;
+let nuevoStock = stockActual;
 
+let lote = null;
     // ==========================================
     // TIPOS DE MOVIMIENTO
     // ==========================================
@@ -60,7 +61,7 @@ export const registrarMovimiento = async (req, res) => {
     });
   }
 
-  const lote = await Lote.findById(loteId);
+  lote = await Lote.findById(loteId);
 
   if (!lote) {
     return res.status(404).json({
