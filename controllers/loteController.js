@@ -32,15 +32,16 @@ export const obtenerLotesPorCodigo = async (req, res) => {
 export const registrarEntrada = async (req, res) => {
   try {
     const {
-      codigoId,
-      cantidad,
-      observacion,
-      numeroLote,
-      fechaVencimiento,
-      numeroRemisionFactura,
-      refCaja,
-      refTarro,
-    } = req.body;
+  codigoId,
+  cantidad,
+  precioUnitario,
+  observacion,
+  numeroLote,
+  fechaVencimiento,
+  numeroRemisionFactura,
+  refCaja,
+  refTarro,
+} = req.body;
 
     // =========================
     // VALIDACIONES
@@ -92,29 +93,31 @@ export const registrarEntrada = async (req, res) => {
     // CREAR LOTE
     // =========================
 
-    const lote = await Lote.create({
-      codigo: codigo._id,
+   const lote = await Lote.create({
+  codigo: codigo._id,
 
-      cantidadInicial: Number(cantidad),
+  cantidadInicial: Number(cantidad),
 
-      stockDisponible: Number(cantidad),
+  stockDisponible: Number(cantidad),
 
-      fechaEntrada,
+  precioUnitario: Number(precioUnitario) || 0,
 
-      numeroLote,
+  fechaEntrada,
 
-      fechaVencimiento: fechaVencimiento || null,
+  numeroLote,
 
-      numeroRemisionFactura,
+  fechaVencimiento: fechaVencimiento || null,
 
-      refCaja,
+  numeroRemisionFactura,
 
-      refTarro,
+  refCaja,
 
-      observacion,
+  refTarro,
 
-      usuario: req.usuario._id,
-    });
+  observacion,
+
+  usuario: req.usuario._id,
+});
 
     // =========================
     // ACTUALIZAR STOCK
