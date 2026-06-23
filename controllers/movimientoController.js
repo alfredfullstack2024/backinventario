@@ -128,15 +128,30 @@ export const registrarMovimiento = async (req, res) => {
     // ==========================================
 
     const movimiento = await Movimiento.create({
-      codigo: codigo._id,
-      tipo,
-      cantidad,
-      stockAnterior: stockActual,
-      stockNuevo: nuevoStock,
-      motivo,
-      observacion,
-      usuario: req.usuario._id,
-    });
+  codigo: codigo._id,
+
+  tipo,
+
+  cantidad,
+
+  stockAnterior: stockActual,
+
+  stockNuevo: nuevoStock,
+
+  motivo,
+
+  observacion,
+
+  usuario: req.usuario._id,
+
+  numeroLote: lote?.numeroLote || "",
+
+  numeroRemisionFactura:
+    lote?.numeroRemisionFactura || "",
+
+  fechaVencimiento:
+    lote?.fechaVencimiento || null,
+});
 
     const movimientoCompleto = await Movimiento.findById(
       movimiento._id,
