@@ -152,6 +152,8 @@ await Movimiento.create({
 
   cantidad: Number(cantidad),
 
+  precioUnitario: lote.precioUnitario,
+
   stockAnterior,
 
   stockNuevo,
