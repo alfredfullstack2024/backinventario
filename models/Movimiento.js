@@ -28,6 +28,11 @@ const movimientoSchema = new mongoose.Schema(
       min: 1,
     },
 
+    precioUnitario: {
+  type: Number,
+  default: 0,
+},
+
     stockAnterior: {
       type: Number,
       required: true,
