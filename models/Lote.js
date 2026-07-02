@@ -61,6 +61,11 @@ refTarro: {
   trim: true,
 },
 
+    proveedor: {
+  type: String,
+  default: "",
+  trim: true,
+},
     observacion: {
       type: String,
       default: "",
