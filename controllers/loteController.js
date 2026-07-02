@@ -41,6 +41,7 @@ export const registrarEntrada = async (req, res) => {
   numeroRemisionFactura,
   refCaja,
   refTarro,
+      proveedor,
 } = req.body;
 
     // =========================
@@ -113,6 +114,8 @@ export const registrarEntrada = async (req, res) => {
   refCaja,
 
   refTarro,
+     
+  proveedor,
 
   observacion,
 
