@@ -140,26 +140,38 @@ export const registrarEntrada = async (req, res) => {
     await codigo.save();
 
     // =========================
-    // CREAR MOVIMIENTO
-    // =========================
+// CREAR MOVIMIENTO
+// =========================
 
-    await Movimiento.create({
-      codigo: codigo._id,
+await Movimiento.create({
+  codigo: codigo._id,
 
-      usuario: req.usuario._id,
+  usuario: req.usuario._id,
 
-      tipo: "entrada",
+  tipo: "entrada",
 
-      cantidad: Number(cantidad),
+  cantidad: Number(cantidad),
 
-      stockAnterior,
+  stockAnterior,
 
-      stockNuevo,
+  stockNuevo,
 
-      motivo: "Ingreso inventario",
+  motivo: "Ingreso inventario",
 
-      observacion,
-    });
+  observacion,
+
+  numeroLote: lote.numeroLote,
+
+  fechaVencimiento: lote.fechaVencimiento,
+
+  numeroRemisionFactura: lote.numeroRemisionFactura,
+
+  refCaja: lote.refCaja,
+
+  refTarro: lote.refTarro,
+
+  proveedor: lote.proveedor,
+});
 
     // =========================
     // RESPUESTA
