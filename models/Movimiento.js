@@ -83,6 +83,11 @@ refTarro: {
   trim: true,
 },
 
+    proveedor: {
+  type: String,
+  default: "",
+  trim: true,
+},
     usuario: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Usuario",
